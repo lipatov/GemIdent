@@ -55,6 +55,11 @@ public class KPhenotypeInfo extends KClassInfo {
 	/** allows the user to specify if <b>GemIdent</b> should classify this phenotype at all during {@link GemIdentClassificationEngine.Classify classification} */
 	private JCheckBox findPixels;
 	
+	/** the user chooses to look for circular phenotypes */
+	private JRadioButton circularButton;
+	/** the user chooses to look for linear phenotypes */
+	private JRadioButton linearButton;
+	
 	/**
 	 * Creates a new class info representing a phenotype. The "NON" phenotype is set up differently.
 	 * It's name field is uneditable and unfocusable.
@@ -71,6 +76,10 @@ public class KPhenotypeInfo extends KClassInfo {
 		findPixels.setSelected(true);
 		findCentroids=new JCheckBox(); 
 		findCentroids.setSelected(true);
+		
+		circularButton=new JRadioButton(new String("circles"));
+	    circularButton.setSelected(true);
+	    linearButton=new JRadioButton(new String("lines"));
 		
 		trainer = new Phenotype();
 		trainer.setName(name);
@@ -115,7 +124,14 @@ public class KPhenotypeInfo extends KClassInfo {
 			findCentroids.setSelected(false);
 
 		colorChooseButton.repaint();
-
+	
+		circularButton=new JRadioButton(new String("circles"));
+	    linearButton=new JRadioButton(new String("lines"));
+		if (trainer.getPhenotypeSort()==Phenotype.CIRCULAR)
+			circularButton.setSelected(true);
+		else if (trainer.getPhenotypeSort()==Phenotype.LINEAR)
+			linearButton.setSelected(true);
+		
 		EditWestBox();
 		SetUpListeners();
 		UnSelect();
@@ -137,10 +153,18 @@ public class KPhenotypeInfo extends KClassInfo {
 			check.add(findPixels);
 			check.add(findCentroids);
 			
+			/* Create the buttons which we use to choose the sort of phenotype to look for */
+		    ButtonGroup phenotypeButtonGroup=new ButtonGroup();
+		    phenotypeButtonGroup.add(circularButton);
+		    phenotypeButtonGroup.add(linearButton);
+
 			super.westBox.add(rmaxLabel);
 			super.westBox.add(rmaxSpinner);
 			super.westBox.add(findLabel);
 			super.westBox.add(check);
+			super.westBox.add(circularButton);
+			super.westBox.add(linearButton);
+
 		}
 	}
 	/** sets up the listeners for the components that change the underlying model */
@@ -226,6 +250,22 @@ public class KPhenotypeInfo extends KClassInfo {
 				}
 			}
 		);
+		circularButton.addActionListener(
+				new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						((Phenotype)trainer).setPhenotypeSort(Phenotype.CIRCULAR);
+						Run.it.GUIsetDirty(true);
+					}
+				}
+			);
+		linearButton.addActionListener(
+				new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						((Phenotype)trainer).setPhenotypeSort(Phenotype.LINEAR);
+						Run.it.GUIsetDirty(true);
+					}
+				}
+			);
 	}
 	/** a dumb struct to hold information about one coordinate in one of the image files */
 	private class ImageAndPoint {

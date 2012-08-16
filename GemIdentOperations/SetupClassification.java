@@ -31,9 +31,9 @@ import java.util.Collection;
 import GemIdentCentroidFinding.PostProcess;
 import GemIdentClassificationEngine.Classify;
 import GemIdentClassificationEngine.Datum;
-import GemIdentClassificationEngine.Features.DatumFeatureSet.FeatureSetName;
 import GemIdentClassificationEngine.DatumSetupForEntireRun;
 import GemIdentClassificationEngine.TrainingData;
+import GemIdentClassificationEngine.Features.DatumFeatureSet.FeatureSetName;
 import GemIdentImageSets.ImageAndScoresBank;
 import GemIdentImageSets.ImageSetInterface;
 import GemIdentImageSets.ImageSetInterfaceWithUserColors;
@@ -135,7 +135,11 @@ public class SetupClassification extends Thread {
 		
 		//what features are we using? Declare a new datum setup for this run
 		datumSetupForEntireRun = new DatumSetupForEntireRun(Run.it.imageset);
-		datumSetupForEntireRun.addFeatureSet(FeatureSetName.ColorRingScores);
+		if (Run.it.checkIfCircularPhenotypes())
+			datumSetupForEntireRun.addFeatureSet(FeatureSetName.ColorRingScores);
+		if (Run.it.checkIfLinearPhenotypes())
+			datumSetupForEntireRun.addFeatureSet(FeatureSetName.ColorDiameterScores);
+		
 //		datumSetupForEntireRun.addFeatureSet(FeatureSetName.MaxLineScores);
 //		datumSetupForEntireRun.addFeatureSet(FeatureSetName.EdgeRingScores);
 		datumSetupForEntireRun.initialize();

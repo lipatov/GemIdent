@@ -90,7 +90,6 @@ import GemIdentTools.Thumbnails;
  */
 @SuppressWarnings("serial")
 public class KPhenotypeTrainPanel extends KTrainPanel {
-
 	/** the mapping from phenotype name to the alpha slider to control the mask of its classification results */
 	private HashMap<String,AlphaSlider> alphaSlidersIdent;
 	/** the mapping from phenotype name to the alpha slider to control the mask of its post-processing / centroids results */

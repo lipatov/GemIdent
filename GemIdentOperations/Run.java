@@ -189,7 +189,8 @@ public class Run implements Serializable{
 	public int num_pixels_to_batch_updates;
 	/** the setting for the pics to classify (see {@link KClassifyPanel#CLASSIFY_ALL all}, {@link KClassifyPanel#CLASSIFY_RANGE range}, {@link KClassifyPanel#CLASSIFY_TRAINED trained}, {@link KClassifyPanel#TEN_RANDOM 10 random}, {@link KClassifyPanel#TWENTY_RANDOM 20 random}, {@link KClassifyPanel#N_RANDOM N random} */
 	public int pics_to_classify;
-//	/** the text the user wrote in the {@link KClassifyPanel#rangeText classify specific images} field */
+	
+	//	/** the text the user wrote in the {@link KClassifyPanel#rangeText classify specific images} field */
 //	public String RANGE_TEXT;
 	/** the text the user wrote in the {@link KClassifyPanel#nRandomText classify N random} field */
 	public Integer N_RANDOM;
@@ -478,6 +479,21 @@ public class Run implements Serializable{
 	}
 	public Collection<Phenotype> getPhenotypeObjects() {
 		return phenotypes.values();
+	}
+	
+	public boolean checkIfCircularPhenotypes() {
+		boolean circular = false;
+		for (Phenotype phenotype:phenotypes.values())
+			if (phenotype.getPhenotypeSort()==Phenotype.CIRCULAR)
+					circular=true;
+		return circular;		
+	}
+	public boolean checkIfLinearPhenotypes() {
+		boolean linear = false;
+		for (Phenotype phenotype:phenotypes.values())
+			if (phenotype.getPhenotypeSort()==Phenotype.LINEAR)
+					linear=true;
+		return linear;		
 	}
 
 	public Collection<Phenotype> getPhenotypesSaveNON(){

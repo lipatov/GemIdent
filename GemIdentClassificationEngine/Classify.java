@@ -260,7 +260,7 @@ public class Classify {
 							if (stop)
 								break classify_all_pixels;
 							counter++;
-							Datum d = datumSetupForImage.generateDatumAtPoint(new Point(i, j));							
+							Datum d = datumSetupForImage.generateDatumAtPoint(new Point(i, j));	
 							int resultClass = (int)classifier.Evaluate(d.getRecord());
 							if (resultClass != 0)
 								(is.get(Run.classMapBck.get(resultClass))).set(i,j,true);

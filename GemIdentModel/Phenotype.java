@@ -46,6 +46,12 @@ public class Phenotype extends TrainSuperclass implements Serializable{
 	/** should this phenotype be looked for at all during classification? */
 	private boolean findPixels;
 	
+	/** the sort of phenotype we are looking for */
+	private int phenotypeSort = CIRCULAR;
+	// different sorts of phenotypes
+	public static final int CIRCULAR=1;
+	public static final int LINEAR=2;
+	
 	/** basically the default constructor */
 	public Phenotype(){
 		super();
@@ -86,5 +92,11 @@ public class Phenotype extends TrainSuperclass implements Serializable{
 	}
 	public void setFindPixels(boolean findPixels) {
 		this.findPixels = findPixels;
+	}
+	public int getPhenotypeSort() {
+		return phenotypeSort;
+	}
+	public void setPhenotypeSort(int phenotypeSort) {
+		this.phenotypeSort = phenotypeSort;
 	}
 }

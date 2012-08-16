@@ -150,6 +150,7 @@ public class Rings {
 			ring = GenerateRing(r);
 		return ring;
 	}
+	
 	/**
 	 * Return a ring of radius r centered at to (not at the origin) whose coordinates
 	 * are included in the rectangle bounded by (0,0) and (xMax,yMax). If the ring 

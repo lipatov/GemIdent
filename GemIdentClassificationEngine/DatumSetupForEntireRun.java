@@ -107,6 +107,9 @@ public class DatumSetupForEntireRun {
 			case ColorRingScores:
 				feature_sets.add(new ColorRingScores());
 				break;
+			case ColorDiameterScores:
+				feature_sets.add(new ColorDiameterScores());
+				break;
 			case MaxLineScores:
 				feature_sets.add(new MaxLineScores());
 				break;

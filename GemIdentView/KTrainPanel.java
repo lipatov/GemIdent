@@ -60,7 +60,7 @@ public abstract class KTrainPanel extends KPanel implements TrainClickListener,S
 
 	/** When the user deletes training points, all points within this radius pixels will be removed */
 	public static final int EraseRadius = 5;
-
+	
 	/** the user wishes to mark positive training points for a particular color or phenotype */
 	protected JToggleButton markPixelButton;
 	/** the user wishes to delete positive training points for a particular color or phenotype */
@@ -353,15 +353,18 @@ public abstract class KTrainPanel extends KPanel implements TrainClickListener,S
 	 * the browser, the add / remove / helper image buttons, the helper slider, various options,
 	 * wires them using listeners
 	 */
-	protected void CreateWest() {
+	protected void CreateWest() {		
+		Container topButtons=Box.createVerticalBox();
+		
 		addClassInfoButton=new JButton();
 		addClassInfoButton.setMnemonic(KeyEvent.VK_A);
 		deleteClassInfoButton=new JButton();
 		deleteClassInfoButton.setMnemonic(KeyEvent.VK_D);
-		Container topButtons=Box.createHorizontalBox();
-		topButtons.add(addClassInfoButton);
-		topButtons.add(deleteClassInfoButton);
-		
+		Container addDeleteButtons=Box.createHorizontalBox();
+		addDeleteButtons.add(addClassInfoButton);
+		addDeleteButtons.add(deleteClassInfoButton);
+		topButtons.add(addDeleteButtons);
+			
 		helperSlider = new JSlider(JSlider.HORIZONTAL,0,80,0);
 		helperSlider.setPreferredSize(new Dimension(80,this.helperSlider.getHeight()));
 		helperSlider.addChangeListener(
